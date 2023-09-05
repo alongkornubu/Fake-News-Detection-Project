@@ -1,0 +1,64 @@
+{% extends 'news/base.html' %} {% load static %} {% block title %} ติดตามข่าว
+{%endblock title%} {% block content %}
+<div class="text-center">
+    <h1 class="font-bold mt-2">ข่าวน่าสนใจ</h1>
+    <div class="mt-3">
+      <form method="GET" action="">
+        <label for="category" class="font-bold">หมวดหมู่:</label>
+        <select name="category" id="category" class=" h-8 border rounded focus:ring-blue-500 focus:border-blue-500 bg-gray-200">
+            <option value="">หมวดหมู่ทั้งหมด</option>
+            {% for category in categories %}
+                <option value="{{ category.id }}" 
+                {% if category.id|stringformat:"s" == request.GET.category %}selected{% endif %}>
+                    {{ category.name }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit" class="bg-gray-200 rounded border h-8 w-10">
+            Click
+        </button>
+         
+        
+    </form>
+
+    </div>
+</div>
+<!-- card -->
+<div class="contianer px-10 mx-auto py-15">
+    <div class="mt-5">
+        <div>
+            <div class="grid grid-cols-4 grid-rows-2 gap-2 shadow">
+                {% for i in news %}
+                    <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                        <div class="px-6 py-4">
+                           {%if i.image%} 
+                                <img src="{{ i.image.url }}" class="w-[40%] h-[40%]">
+                            {% endif %}
+                            <!-- <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt=""> -->
+
+                            <div class="font-bold text-xl mb-2">{{i.title}}</div>
+                            <p class="text-gray-700 text-base truncate ...">
+                                {{ i.text }}
+                            </p>
+                        </div>
+                        <div class="px-6 pt-4 pb-2">
+                            <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2"># {{i.category}}</span>
+                        </div>
+                        <div class="p-2">
+                            <a href="details/{{i.id}}" class="inline-flex items-center text-sm text-blue-600 dark:text-blue-500 hover:underline">
+                                Read more
+                                <svg class="w-6 h-6 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd"></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+
+
+    {% endblock content %}
+</div>

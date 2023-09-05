@@ -1,0 +1,48 @@
+{% extends 'news/base.html' %} {% load static %} {% block title %} ติดตามข่าว
+{%endblock title%} {% block content %}
+<p class="underline px-10">ย้อนกลับ <a href="/follow" class="">ติดตามข่าว</a></p>
+    <div class="contianer px-10 mx-auto py-15">
+        <div class="text-center">
+             <p class="font-bold">{{id_news.title}}</p> 
+        </div>
+        <div>
+            <p class="font-medium">ประเภทข่าว: {{id_news.category}}</p>
+        </div>
+        <div>
+            {% if id_news.label == True  %}
+                <div>
+                      <div
+                        class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-green-200 text-green-700 rounded-full"
+                      > #
+                        ข่าวจริง
+                      </div>
+            {% else %}
+                <div>
+                  <div
+                    class="text-xs inline-flex items-center font-bold leading-sm uppercase px-3 py-1 bg-red-200 text-red-700 rounded-full"
+                  >
+                  #
+                    ข่าวปลอม
+                  </div>
+            {% endif %}
+            
+        </div>
+        <div class="grid justify-items-center">
+            <!-- <img src="https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80" alt=""> -->
+            <div>
+              {%if id_news.image%} 
+                  <img src="{{ id_news.image.url }}" class="w-[80%] h-[80%]">
+              {% endif %}
+            </div>
+        </div>
+        <div class="my-4">
+            <p>{{id_news.text}}</p>
+        </div>
+        
+        <div>
+            
+        </div>
+    </div>
+    
+
+{% endblock content %}

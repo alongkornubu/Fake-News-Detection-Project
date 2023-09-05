@@ -1,0 +1,87 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>News Detection {% block title %}: {%endblock title%}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <nav class="flex items-center justify-between flex-wrap bg-gray-700 p-4">
+        <div class="flex items-center flex-no-shrink text-white mr-6"></div>
+        <div class="block lg:hidden">
+            <button class="flex items-center px-3 py-2 border rounded text-teal-lighter border-teal-light hover:text-white hover:border-white">
+                <svg class="h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <title>Menu</title>
+                    <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                </svg>
+            </button>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+            <div class="text-sm lg:flex-grow">
+                <a href="{% url 'detect_news'%}" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 font-bold">
+                    ตรวจสอบข่าว
+                </a>
+                <!-- <a href="https://www.antifakenewscenter.com/" target="_blank" rel="noopener noreferrer" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 font-bold hover">
+                    ศูนย์ต่อต้านข่าวปลอม ประเทศไทย
+                </a> -->
+            </div>
+            {% if user.is_authenticated %}
+            <div>
+                <a href="{% url 'follow'%}" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 font-sm">
+                    ข่าว
+                </a>
+                 <a href="{% url 'feedback' %}" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 font-sm">ส่งข้อเสนอแนะ</a>
+            </div>
+            <div>
+              {% if request.user.is_staff %}
+                <div>
+                    <a href="{% url 'upload'%}" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-white mr-4 font-sm">
+                        อัพไฟล์ .csv
+                    </a>
+                </div>
+            {% endif %}
+            </div>
+            <img src="{% static 'image/icons8-user.png' %}" class="w-4 h-4 mt-1" alt="myuser">
+            <label class="text-sm text-white font-bold p-1">{{ request.user }}</label>
+            <div class="text-white p-1">|</div>
+            <div class="text-white">
+                <a href="{% url 'logout'%}">ออกจากระบบ</a>
+            </div>
+            
+            {% else %}
+            <div>
+                <a href="{% url 'login' %}" class="inline-block text-sm px-4 py-2 leading-none  text-white border-white hover:border-transparent hover:text-teal ">เข้าสู่ระบบ</a>
+                <a href="{% url 'signup' %}" class="inline-block text-sm px-4 py-2 leading-none  text-white border-white hover:border-transparent hover:text-teal ">สมัครสมาชิก</a>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+    {% block content %}
+    {% endblock content%}
+    <footer class="p-4 bg-white rounded-lg shadow md:px-6 md:py-8  mt-56">
+        <div class="sm:flex sm:items-center sm:justify-between">
+            <ul class="flex flex-wrap items-center mb-6 text-sm text-gray-500 sm:mb-0 dark:text-gray-400">
+                <li>
+                    <a href="https://github.com/alongkornubu" class="mr-4 hover:underline md:mr-6 ">เกี่ยวกับ</a>
+                </li>
+                <li>
+                    <a href="{% url 'feedback' %}" class="mr-4 hover:underline md:mr-6">ส่งข้อเสนอแนะเกี่ยวกับข่าว</a>
+                </li>
+                <!-- <li>
+                    <a href="https://www.antifakenewscenter.com/" class="mr-4 hover:underline md:mr-6 ">ข่าว</a>
+                </li> -->
+            </ul>
+        </div>
+        <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8">
+        <span class="block text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2022 <a href="" class="hover:underline">FakeNewsDetection™</a>.
+        </span>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.6.4.js" integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E=" crossorigin="anonymous"></script>
+</body>
+
+</html>

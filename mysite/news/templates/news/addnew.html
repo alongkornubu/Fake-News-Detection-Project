@@ -1,0 +1,21 @@
+{% extends 'news/base.html' %}
+{% block content %}
+    <h1>Add News</h1>
+    <form method="post" action="">
+        <label for="">หัวข้อข่าว</label>
+        <input type="text" name="title" id="title">
+        <br>
+
+        <label for="">เนื้อหาข่าว</label>
+        <input type="text" name="text" id="text">
+
+        <label for="">ประเภทข่าว</label>
+        <select name="" id="tag"></select>
+
+        <label for="">Image</label>
+        <input type="file">
+
+        <button type="submit">ส่งข้อมูล</button>
+
+    </form>
+{% endblock content %}

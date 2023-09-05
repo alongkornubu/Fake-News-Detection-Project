@@ -1,0 +1,109 @@
+{% extends 'news/base.html' %} {% load static %} 
+
+{% block title %} แจ้งเบาะแสข่าว {%endblock title%}
+
+{% block content %}
+
+{% if status  %} 
+
+  {% if status == 'alert' %}
+
+      <div class="mt-20 px-4 py-3 leading-normal text-red-700 bg-red-100 rounded-lg" role="alert">
+        <p class="font-bold">คำเตือน</p>
+        <p>กรุณากรอกข้อมูลให้ครบทุกช่อง</p>
+      </div>
+  {% else %}
+          
+      <div class="mt-20 px-4 py-3 leading-normal text-green-700 bg-green-100 rounded-lg" role="alert">
+        <p class="font-bold">สำเร็จ</p>
+        <p>ทางเราได้รับข้อมูลเรียบร้อย</p>
+      </div>
+  {% endif %}
+          
+      
+
+{% endif %}
+
+
+<div class="mt-15 p-5 grid justify-items-center">
+  <form method="POST" action="" enctype = "multipart/form-data">
+    {% csrf_token %}
+    <div>
+      <label for="name">ชื่อ</label><br>
+        <input class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" name="name" type="text" placeholder="ชื่อ">
+    </div>
+    <br>
+  
+    <div>
+      <label for="name">หัวข้อข่าว</label><br>
+        <input class="mt-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="title" name="title" type="text" placeholder="ห้วข่าว">
+    </div>
+    <br>
+  
+    <div class="">
+      <div>
+        <label>ข่าวจริงหรือข่าวปลอม</label>
+      </div>
+      <div class="">
+        <!-- <select class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500  -->
+        <select name="label" id="label" class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-2 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500">
+          <option value="True">จริง</option>
+          <option value="False">ปลอม</option>
+        </select>
+        
+      </div>
+        <br>
+    </div>
+      <div class="">
+        <label>ประเภทข่าว</label>
+        <div >
+          <select name="category" id="category" class="block appearance-none w-full bg-white border border-gray-200 text-gray-700 py-3 px-2 pr-5 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500" >
+            <option value="covid-19">โควิด-19</option>
+            <option value="มิจฉาชีพ">มิจฉาชีพ</option>
+            <option value="กู้เงิน">กู้เงิน</option>
+            
+          </select>
+  
+        </div>
+      </div>
+    <br>
+  
+    <div class="border">
+      <div>
+        <label>
+          รูปภาพ
+        </label>
+      </div>
+      <div>
+        <input type="file"  name="images" multiple>
+      </div>
+      
+    </div>
+  
+    <br>
+    
+    <div>
+      <label for="">เนื้อหาข่าว</label>
+      <textarea
+        name="text"
+        id="comment"
+        cols="30"
+        rows="10"
+        class="block p-2.5 w-full h-28 text-sm text-black bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-white dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+        placeholder="เนื้อหาข่าว"
+      ></textarea>
+    </div>
+    <div>
+      <button
+        type="submit"
+        class="bg-blue-300 text-white w-32 h-10 mt-2 rounded hover:bg-blue-500"
+      >
+        ส่งคำแนะนำ
+      </button>
+    </div>
+
+    
+  </form>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,37 @@
+{% extends 'news/base.html' %} {% load static %} {% block content %}
+
+
+
+
+
+    <div class="grid justify-items-center mt-9">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="text-center w-[30%] leading-normal text-green-700 bg-green-100 rounded-lg" role="alert">
+                   <p class="">{{ message }}</p> 
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+                <label for="" class="font-bold ">อัพโหลดไฟล์ .CSV</label>
+                <div class="mt-2">
+                    <input type="file" name="csv_upload">
+                </div> 
+            
+                <div>
+                    <button class="bg-green-500 text-white w-32 h-10 mt-2 rounded hover:bg-blue-500" type="submit">Upload/Train</button>
+                </div>
+                
+                <div class="mt-8">
+                   ผลลัพธ์ <p class="border border-gray-300">{{ my_models }}</p>
+                </div>
+            
+            </div>
+    
+            
+        </form>
+    </div>
+
+{% endblock content%}

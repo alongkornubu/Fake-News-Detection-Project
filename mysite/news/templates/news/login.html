@@ -1,0 +1,44 @@
+{% extends 'news/base.html' %} 
+{% load static %}
+
+{% block title %} login {% endblock title %}
+
+{% block content %}
+
+
+
+        <div class="bg-white lg:w-4/12 md:6/12 w-10/12 m-auto my-10 shadow-md">
+            <div class="py-8 px-8 rounded-xl">
+                <h1 class="font-medium text-2xl mt-3 text-center">เข้าสู่ระบบ</h1>
+                <form action="/login" method="post" class="mt-6">
+                    {% csrf_token %}
+
+                        <label for="username" class="">ชื่อผู้ใช้:</label>
+                        <input type="text" name="username" id="username" class="rounded-sm border-2 px-4 py-3 mt-3 focus:outline-none bg-white w-full">
+                        <br>
+                        <label for="password">รหัสผ่าน:</label>
+                        <input type="password" name="password" id="password" class="rounded-sm border-2 px-4 py-3 mt-3 focus:outline-none bg-white w-full">
+                        <button type="submit" class="mt-3 block text-center text-white bg-green-500 p-3 duration-300 rounded-sm hover:bg-green-300 w-full">เข้าสู่ระบบ</button>
+                </form>
+                <p class="mt-12 text-xs text-center font-light text-gray-400"> ลงทะเบียนสมาชิก<a href="{% url 'signup' %}" class="text-black font-medium"> ลงทะเบียน </a>  </p> 
+            </div>
+            {% if messages %}
+                {% for message in messages %}
+                <div class="mt-10 px-4 py-3 leading-normal text-red-700 bg-red-100 rounded-lg" role="alert">
+                    {{ message }}
+                </div>
+
+                 {% endfor %}
+            {% endif %}
+        </div>
+
+
+
+
+
+
+{% endblock content %}
+
+
+
+
